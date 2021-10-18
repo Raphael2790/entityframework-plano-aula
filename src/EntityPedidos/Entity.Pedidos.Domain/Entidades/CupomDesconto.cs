@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System;
 using Entity.Pedidos.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Pedidos.Domain.Entidades
 {
+    [Table("cupons_descontos")]
     public class CupomDesconto
     {
         public CupomDesconto()

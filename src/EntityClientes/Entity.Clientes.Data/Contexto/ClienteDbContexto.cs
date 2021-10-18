@@ -41,7 +41,7 @@ namespace Entity.Clientes.Data.Contexto
 
             modelBuilder.Entity<Endereco>(entity =>
             {
-                entity.ToTable("enderecos", t => t.ExcludeFromMigrations());
+                entity.ToTable("enderecos");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 

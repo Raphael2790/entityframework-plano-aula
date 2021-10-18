@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using Entity.Pedidos.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
 namespace Entity.Pedidos.Domain.Entidades
 {
+    [Table("pedidos")]
     public partial class Pedido
     {
         public Pedido()
@@ -21,7 +23,7 @@ namespace Entity.Pedidos.Domain.Entidades
         public decimal Desconto {get;set;}
         public double ValorTotal { get; set; }
         public DateTime Data { get; set; }
-        public int VoucherId {get;set;}
+        public int CupomDescontoId {get;set;}
         public PedidoStatus PedidoStatus {get;set;}
 
         public virtual CupomDesconto CupomDesconto {get;set;}
