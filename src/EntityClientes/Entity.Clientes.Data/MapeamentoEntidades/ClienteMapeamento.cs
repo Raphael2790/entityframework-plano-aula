@@ -12,7 +12,7 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
 
             builder.HasIndex(e => e.EnderecoId, "IX_clientes_endereco_id");
 
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.Id).HasName("PK_clientes");
 
             builder.Property(c => c.Id)
                 .HasColumnName("id");
@@ -27,11 +27,13 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
                 .HasColumnType("text");
 
             builder.Property(c => c.EnderecoId)
-                .HasColumnName("endereco_id");
+                .HasColumnName("endereco_id")
+                .IsRequired();
 
             builder.HasOne(c => c.Endereco)
                 .WithMany(e => e.Clientes)
-                .HasForeignKey(c => c.EnderecoId);
+                .HasForeignKey(c => c.EnderecoId)
+                .HasConstraintName("FK_clientes_enderecos_endereco_id");
         }
     }
 }

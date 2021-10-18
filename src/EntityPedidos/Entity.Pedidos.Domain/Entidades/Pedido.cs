@@ -17,15 +17,16 @@ namespace Entity.Pedidos.Domain.Entidades
         }
 
         public int Id { get; set; }
-        public int Codigo {get;set;} //Código de rastreio do pedido
+        public string Codigo {get;set;} //Código de rastreio do pedido
         public int ClienteId { get; set; }
         public int EnderecoId { get; set; } //Endereço de entrega do pedido
         public decimal Desconto {get;set;}
-        public double ValorTotal { get; set; }
+        public decimal ValorTotal { get; set; }
         public DateTime Data { get; set; }
         public int CupomDescontoId {get;set;}
         public PedidoStatus PedidoStatus {get;set;}
-
+    
+        //EF- relacionamentos
         public virtual CupomDesconto CupomDesconto {get;set;}
         public virtual ICollection<PedidoItem> PedidoItens {get;set;}
         public virtual Endereco Endereco { get; set;}

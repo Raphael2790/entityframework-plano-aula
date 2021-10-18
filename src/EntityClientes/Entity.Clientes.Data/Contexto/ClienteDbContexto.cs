@@ -1,7 +1,4 @@
-﻿using System.Reflection.Metadata;
-using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using Entity.Clientes.Domain.Entidades;
 using Entity.Clientes.Data.MapeamentoEntidades;
 
@@ -27,7 +24,6 @@ namespace Entity.Clientes.Data.Contexto
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=localhost;database=EntityFrameworkComunidade;user=root;password=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.26-mysql"));
             }
         }
@@ -39,47 +35,9 @@ namespace Entity.Clientes.Data.Contexto
 
             modelBuilder.ApplyConfiguration<Cliente>(new ClienteMapeamento());
 
-            modelBuilder.Entity<Endereco>(entity =>
-            {
-                entity.ToTable("enderecos");
+            modelBuilder.ApplyConfiguration<Endereco>(new EnderecoMapeamento());
 
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Bairro)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .HasColumnName("bairro");
-
-                entity.Property(e => e.Cep)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("cep");
-
-                entity.Property(e => e.Cidade)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .HasColumnName("cidade");
-
-                entity.Property(e => e.Complemento)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .HasColumnName("complemento");
-
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasMaxLength(2)
-                    .HasColumnName("estado");
-
-                entity.Property(e => e.Logradouro)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .HasColumnName("logradouro");
-
-                entity.Property(e => e.Numero)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .HasColumnName("numero");
-            });
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClienteDbContexto).Assembly);
 
             OnModelCreatingPartial(modelBuilder);
         }

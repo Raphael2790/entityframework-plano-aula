@@ -19,7 +19,7 @@ CREATE TABLE `cupons_descontos` (
 
 CREATE TABLE `pedidos` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `codigo` int NOT NULL,
+    `codigo` varchar(150) NULL,
     `cliente_id` int NOT NULL,
     `endereco_id` int NOT NULL,
     `desconto` decimal(65,30) NOT NULL,
