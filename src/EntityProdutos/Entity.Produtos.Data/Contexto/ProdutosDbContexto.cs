@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Entity.Produtos.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using Entity.Produtos.Domain.Entidades;
 
 #nullable disable

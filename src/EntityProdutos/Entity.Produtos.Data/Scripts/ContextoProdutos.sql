@@ -41,5 +41,3 @@ CREATE INDEX `IX_produtos_categoria_id` ON `produtos` (`categoria_id`);
 
 
 CREATE INDEX `IX_produtos_fornecedor_id` ON `produtos` (`fornecedor_id`);
-
-

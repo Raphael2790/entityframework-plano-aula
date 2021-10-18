@@ -1,7 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
 namespace Entity.Produtos.Domain.Entidades
 {
-    public class Endereco
+    public partial class Endereco
     {
+        public Endereco()
+        {
+            Fornecedores = new HashSet<Fornecedor>();
+        }
+
         public int Id { get; set; }
         public string Logradouro { get; set; }
         public string Cep { get; set; }
@@ -10,5 +20,7 @@ namespace Entity.Produtos.Domain.Entidades
         public string Complemento { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+
+        public virtual ICollection<Fornecedor> Fornecedores { get; set; }
     }
 }

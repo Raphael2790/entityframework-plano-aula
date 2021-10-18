@@ -87,4 +87,5 @@ dotnet add reference ../entity-framework-mvc.csproj
 # Links utéis
 ``` bash
     Documentação CLI entity-framework-core : https://docs.microsoft.com/pt-br/ef/core/cli/dotnet
+    Documentação completa entity-framework : https://docs.microsoft.com/pt-br/ef/
 ```

@@ -1,14 +1,20 @@
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+
+#nullable disable
 
 namespace Entity.Produtos.Domain.Entidades
 {
-    [Table("categorias")]
-    public class Categoria
+    public partial class Categoria
     {
+        public Categoria()
+        {
+            Produtos = new HashSet<Produto>();
+        }
+
         public int Id { get; set; }
-        public string Descricao {get;set;}
-        
-        public virtual List<Produto> Produtos {get;set;} 
+        public string Descricao { get; set; }
+
+        public virtual ICollection<Produto> Produtos { get; set; }
     }
 }
