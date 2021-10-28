@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entity.Clientes.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -34,6 +35,16 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
                 .WithMany(e => e.Clientes)
                 .HasForeignKey(c => c.EnderecoId)
                 .HasConstraintName("FK_clientes_enderecos_endereco_id");
+
+            builder.HasData(new List<Cliente>(){
+                new Cliente
+                {
+                    Id = 1,
+                    Nome = "Raphael",
+                    Observacao = "Pedidos devem ser entregues em determinado local",
+                    EnderecoId = 1
+                }
+            });
         }
     }
 }

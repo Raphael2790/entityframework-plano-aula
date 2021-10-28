@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entity.Clientes.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,6 +13,8 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
 
             builder.HasKey(e => e.Id)
                 .HasName("PK_clientes");
+
+            builder.HasIndex(e => e.Id, "IX_PK_enderecoid");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")
@@ -57,6 +60,20 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
             builder.HasMany(e => e.Clientes)
                 .WithOne(c => c.Endereco)
                 .HasForeignKey(c => c.EnderecoId);
+
+            builder.HasData(new List<Endereco>(){
+                 new Endereco
+                    {
+                        Id = 1,
+                        Logradouro = "Rua Antonia Aparecida",
+                        Bairro = "Santa Clara",
+                        Cidade = "São Paulo",
+                        Cep = "019187-091",
+                        Complemento = "Casa 10",
+                        Estado = "SP",
+                        Numero = "345"
+                    }
+            });
         }
     }
 }
