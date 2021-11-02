@@ -1,8 +1,8 @@
-using Entity.Pedidos.Domain.Entidades;
+using Entity.Produtos.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Entity.Pedidos.Data.MapeamentoEntidades
+namespace Entity.Produtos.Data.MapeamentoEntidades
 {
     public class EnderecoMapeamento : IEntityTypeConfiguration<Endereco>
     {
@@ -56,9 +56,10 @@ namespace Entity.Pedidos.Data.MapeamentoEntidades
                 .IsRequired();
 
             //Definição opicional uma vez que feita na classe Cliente
-            builder.HasMany(e => e.Pedidos)
+            builder.HasMany(e => e.Fornecedores)
                 .WithOne(c => c.Endereco)
-                .HasForeignKey(c => c.EnderecoId);
+                .HasForeignKey(c => c.EnderecoId)
+                .HasConstraintName("FK_fornecedores_enderecos_enderecoid");
         }
     }
 }

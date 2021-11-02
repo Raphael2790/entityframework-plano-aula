@@ -9,11 +9,12 @@ namespace Entity.Produtos.Domain.Entidades
         public string Nome { get; set; }
         public string DocumentoIdentificacao { get; set; }
         public bool Ativo { get; set; }
+        public TipoFornecedor TipoFornecedor {get;set;}
+        public int EnderecoId { get; set; }
 
         //EF - Relacionamento
         public virtual List<Produto> Produtos {get;set;}
         public virtual Endereco Endereco {get;set;}
-        public TipoFornecedor TipoFornecedor {get;set;}
 
         public bool DocumentoIdentificacaoEhValido()
         {

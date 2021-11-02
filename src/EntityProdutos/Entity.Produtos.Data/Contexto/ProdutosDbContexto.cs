@@ -33,28 +33,7 @@ namespace Entity.Produtos.Data.Contexto
         {
             modelBuilder.HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_0900_ai_ci");
-
-            modelBuilder.Entity<Produto>(entity =>
-            {
-                entity.ToTable("produtos");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Descricao)
-                    .HasColumnType("text")
-                    .HasColumnName("descricao");
-
-                entity.Property(e => e.Nome)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .HasColumnName("nome");
-
-                entity.Property(e => e.UrlImagem)
-                    .HasMaxLength(255)
-                    .HasColumnName("url_imagem");
-
-                entity.Property(e => e.Valor).HasColumnName("valor");
-            });
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProdutosDbContexto).Assembly);
 
             OnModelCreatingPartial(modelBuilder);
         }
