@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Produtos.Domain.Entidades
@@ -9,6 +10,7 @@ namespace Entity.Produtos.Domain.Entidades
         public string Nome { get; set; }
         public string DocumentoIdentificacao { get; set; }
         public bool Ativo { get; set; }
+        [DisplayName("Tipo Fornecedor")]
         public TipoFornecedor TipoFornecedor {get;set;}
         public int EnderecoId { get; set; }
 

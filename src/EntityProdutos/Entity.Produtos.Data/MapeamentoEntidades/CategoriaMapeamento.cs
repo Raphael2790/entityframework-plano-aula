@@ -28,7 +28,7 @@ namespace Entity.Produtos.Data.MapeamentoEntidades
             builder.HasMany(c => c.Produtos)
                 .WithOne(p => p.Categoria)
                 .HasForeignKey(c => c.CategoriaId)
-                .HasConstraintName("FK_produtos_categorias_categoriaid");
+                .HasConstraintName("FK_produtos_categorias_categoria_id");
 
             builder.HasData(new List<Categoria>()
             {

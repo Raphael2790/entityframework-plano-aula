@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entity.Produtos.Data.Contexto;
 using Entity.Produtos.Domain.Entidades;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace entity_framework.Controllers
 {
@@ -44,6 +45,7 @@ namespace entity_framework.Controllers
         // GET: Produtos/Create
         public IActionResult Create()
         {
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Descricao");
             return View();
         }
 
@@ -52,7 +54,7 @@ namespace entity_framework.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,UrlImagem,Descricao,Valor")] Produto produto)
+        public async Task<IActionResult> Create([Bind("Id,Nome,UrlImagem,Descricao,Valor,CategoriaId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +62,7 @@ namespace entity_framework.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Descricao");
             return View(produto);
         }
 
