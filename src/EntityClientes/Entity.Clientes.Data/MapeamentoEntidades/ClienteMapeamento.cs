@@ -31,6 +31,10 @@ namespace Entity.Clientes.Data.MapeamentoEntidades
                 .HasColumnName("endereco_id")
                 .IsRequired();
 
+            builder.Property(c => c.DataCadastro)
+                .HasColumnName("data_cadastro")
+                .HasColumnType("datetime(6)");
+
             builder.HasOne(c => c.Endereco)
                 .WithMany(e => e.Clientes)
                 .HasForeignKey(c => c.EnderecoId)

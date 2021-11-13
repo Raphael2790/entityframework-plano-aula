@@ -23,7 +23,10 @@ namespace entity_framework.Controllers
         public async Task<IActionResult> Index()
         {
             AnalisandoChangeTracker();
-            return View(await _context.Fornecedores.ToListAsync());
+            //Remove o rastreio das entidades ao traze-las para memoria, então não gerencia mudanças
+            await _context.Fornecedores.AsNoTracking().ToListAsync();
+            //Remove o rastreio e aplica a resolução de identidades para não criar varias instancias repetidas
+            return View(await _context.Fornecedores.AsNoTrackingWithIdentityResolution().ToListAsync());
         }
 
         // GET: Fornecedores/Details/5
@@ -34,8 +37,34 @@ namespace entity_framework.Controllers
                 return NotFound();
             }
 
+            _context.ChangeTracker.LazyLoadingEnabled = false;
+
+            //Eager Load traremos adiantado os Produtos e Categoria de cada produto
             var fornecedor = await _context.Fornecedores
+                .Include(f => f.Produtos)
+                .ThenInclude(p => p.Categoria)
+                .AsSplitQuery()
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            //Utilizada para separar consultas em pequenos trechos para otimizar performance quanto temos muitos joins
+            //O padrão utilizado é consulta unica
+            var fornecedor2 = await (from f in _context.Fornecedores
+                                     join p in _context.Produtos on f.Id equals p.FornecedorId
+                                     where f.Id == id
+                                     select f)
+                                     .AsSplitQuery()
+                                    .FirstOrDefaultAsync();
+
+            //Explicit Load faz somente o carregamento das propriedades de navegação quando invocados
+            if(!_context.Entry(fornecedor2).Collection(x => x.Produtos).IsLoaded)
+                await _context.Entry(fornecedor2).Collection(x => x.Produtos).LoadAsync();
+
+            foreach (var produto in fornecedor2.Produtos)
+            {
+                if(!_context.Entry(produto).Reference(x => x.Categoria).IsLoaded)
+                    await _context.Entry(produto).Reference(x => x.Categoria).LoadAsync();
+            }
+
             if (fornecedor == null)
             {
                 return NotFound();

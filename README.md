@@ -24,6 +24,7 @@
   dotnet add package Microsoft.EntityFrameworkCore --version 5.0.8
   dotnet add package Microsoft.EntityFrameworkCore.Tools --version 5.0.8
   dotnet add package Pomelo.EntityFrameworkCore.MySql --version 5.0.1
+  dotnet add package Dapper -s https://api.nuget.org/v3/index.json
 ```
 
 # Instalando mysql no servidor

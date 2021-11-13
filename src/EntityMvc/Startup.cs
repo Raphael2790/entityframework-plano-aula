@@ -1,4 +1,8 @@
 using Entity.Clientes.Data.Contexto;
+using Entity.Clientes.Data.Queries;
+using Entity.Clientes.Data.Repositories;
+using Entity.Clientes.Domain.Interfaces;
+using Entity.Clientes.Domain.Interfaces.Repositories;
 using Entity.Pedidos.Data.Contexto;
 using Entity.Produtos.Data.Contexto;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +31,8 @@ namespace entity_framework
             services.AddDbContext<ProdutosDbContexto>(options => options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
             services.AddDbContext<PedidosDbContexto>(options => options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
             services.AddDbContext<ClienteDbContexto>(options => options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IClientesQuery, ClientesConsultas>();
             services.AddControllersWithViews();
         }
 
