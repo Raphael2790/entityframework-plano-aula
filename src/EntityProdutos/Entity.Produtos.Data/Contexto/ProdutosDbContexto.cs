@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Entity.Produtos.Domain.Entidades;
-
-#nullable disable
+using Entity.Produtos.Domain.Repositories;
+using System.Threading.Tasks;
 
 namespace Entity.Produtos.Data.Contexto
 {
-    public partial class ProdutosDbContexto : DbContext
+    public partial class ProdutosDbContexto : DbContext, IUnitOfWork
     {
         public ProdutosDbContexto()
         {
@@ -39,5 +39,7 @@ namespace Entity.Produtos.Data.Contexto
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public async Task<bool> Commit() => await base.SaveChangesAsync() > 0;
     }
 }

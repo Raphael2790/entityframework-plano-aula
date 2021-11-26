@@ -20,6 +20,8 @@
     <ProjectReference Include="..\EntityClientes\Entity.Clientes.Data\Entity.Clientes.Data.csproj" />
     <ProjectReference Include="..\EntityProdutos\Entity.Produtos.Data\Entity.Produtos.Data.csproj" />
     <ProjectReference Include="..\EntityPedidos\Entity.Pedidos.Data\Entity.Pedidos.Data.csproj" />
+    <ProjectReference Include="..\Entity.Core\Entity.Core.csproj" />
+    <ProjectReference Include="..\EntityClientes\Entity.Clientes.Application\Entity.Clientes.Application.csproj" />
   </ItemGroup>
 
 </Project>

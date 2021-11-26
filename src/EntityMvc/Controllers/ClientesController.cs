@@ -9,6 +9,8 @@ using Entity.Clientes.Data.Contexto;
 using Entity.Clientes.Domain.Entidades;
 using Entity.Clientes.Domain.Interfaces.Repositories;
 using Entity.Clientes.Domain.Interfaces;
+using Entity.Core.Mediator;
+using Entity.Clientes.Application.Events;
 
 namespace entity_framework.Controllers
 {
@@ -17,13 +19,15 @@ namespace entity_framework.Controllers
         private readonly IClienteRepository _clienteRepository;
         private readonly ClienteDbContexto _contexto;
         private readonly IClientesQuery _clientesQuery;
-        public ClientesController(IClienteRepository clienteRepository, 
+        private readonly IMediatorHandler _mediator;
+        public ClientesController(IClienteRepository clienteRepository,
                                   ClienteDbContexto contexto,
-                                  IClientesQuery clientesQuery)
+                                  IClientesQuery clientesQuery, IMediatorHandler mediator)
         {
             _clienteRepository = clienteRepository;
             _contexto = contexto;
             _clientesQuery = clientesQuery;
+            _mediator = mediator;
         }
 
         // GET: Clientes
@@ -261,6 +265,7 @@ namespace entity_framework.Controllers
                 cliente.DataCadastro = DateTime.Now;
                 await _clienteRepository.Salvar(cliente);
                 await _contexto.SaveChangesAsync();
+                await _mediator.PublicarEvento(new ClienteCadastradoEvento(cliente.Id, cliente.Nome, cliente.Observacao));
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EnderecoId"] = new SelectList(await _clienteRepository.BuscarEnderecosClientesCadastrados(), "Id", "Bairro", cliente.EnderecoId);
