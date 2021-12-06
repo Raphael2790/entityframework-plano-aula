@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Entity.Clientes.Application.Handlers;
 using Entity.Clientes.Data.Contexto;
 using Entity.Clientes.Data.Queries;
@@ -6,10 +5,12 @@ using Entity.Clientes.Data.Repositories;
 using Entity.Clientes.Domain.Interfaces;
 using Entity.Clientes.Domain.Interfaces.Repositories;
 using Entity.Core.Mediator;
-using Entity.Core.Messages;
+using Entity.Pedidos.Application.Handlers;
+using Entity.Pedidos.Application.Queries;
 using Entity.Pedidos.Data.Contexto;
 using Entity.Pedidos.Data.Repositories;
 using Entity.Pedidos.Domain.Repositories;
+using Entity.Produtos.Application.Handlers;
 using Entity.Produtos.Data.Contexto;
 using Entity.Produtos.Data.Repositories;
 using Entity.Produtos.Domain.Repositories;
@@ -51,11 +52,17 @@ namespace entity_framework
             services.AddScoped<IFornecedoresRepository, FornecedoresRepository>();
             services.AddScoped<IPedidosRepository, PedidosRepository>();
             services.AddScoped<IClientesQuery, ClientesConsultas>();
+            services.AddScoped<IPedidosQueries, PedidoQueries>();
 
             services.AddSingleton<IMediatorHandler, MediatorHandler>((provider) => 
             {
                 var service = new MediatorHandler();
                 service.RegistrarEventHandler(new ClienteEventoHandler());
+                service.RegistrarEventHandler(new ProdutosPedidosEventoHandler());
+                service.RegistrarEventHandler(new ProdutosEstoqueBaixoHandler());
+                service.RegistrarCommandHandler(new AtualizarPedidoHandler(provider.GetRequiredService<IPedidosRepository>()));
+                service.RegistrarCommandHandler(new RemoverPedidoHandler(provider.GetRequiredService<IPedidosRepository>()));
+                service.RegistrarCommandHandler(new NovoPedidoHandler(provider.GetRequiredService<IPedidosRepository>()));
                 return service;
             });
 

@@ -22,6 +22,8 @@
     <ProjectReference Include="..\EntityPedidos\Entity.Pedidos.Data\Entity.Pedidos.Data.csproj" />
     <ProjectReference Include="..\Entity.Core\Entity.Core.csproj" />
     <ProjectReference Include="..\EntityClientes\Entity.Clientes.Application\Entity.Clientes.Application.csproj" />
+    <ProjectReference Include="..\EntityProdutos\Entity.Produtos.Application\Entity.Produtos.Application.csproj" />
+    <ProjectReference Include="..\EntityPedidos\Entity.Pedidos.Application\Entity.Pedidos.Application.csproj" />
   </ItemGroup>
 
 </Project>

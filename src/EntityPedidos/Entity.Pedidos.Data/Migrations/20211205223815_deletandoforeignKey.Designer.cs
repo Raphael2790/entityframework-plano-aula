@@ -3,14 +3,16 @@ using System;
 using Entity.Pedidos.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Entity.Pedidos.Data.Migrations
 {
     [DbContext(typeof(PedidosDbContexto))]
-    partial class PedidosDbContextoModelSnapshot : ModelSnapshot
+    [Migration("20211205223815_deletandoforeignKey")]
+    partial class deletandoforeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
